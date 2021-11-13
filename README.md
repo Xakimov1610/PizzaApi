@@ -6,31 +6,31 @@ Tasavvur qiling siz `Ilmhub Pizza` pitsa do'konlari tarmog'ida dasturiy ta'min
 
 ### Topshiriq
 
-[Asp.Net](http://asp.net/) Core orqali yangi web Api proyekt yarating. Proyektda ma'lumotlar ombori uchun SQL Serverdan foydalaning. Tarmoqdagi pitsa turlarini yaratish, o'zgartirish, o'chirish va taqdim etish uchun WebApi Controller actionlar yarating.
+[Asp.Net](http://asp.net/) Core orqali yangi web Api proyekt yarating. Proyektda ma'lumotlar ombori uchun SQL Serverdan foydalaning. Tarmoqdagi pitsa turlarini yaratish, o'zgartirish, o'chirish va taqdim etish uchun WebApi Controller actionlar yarating. ✅
 
 ### Pizza entity
 
 `/Entities/Pizza.cs`
 
-- **Id**: Guid → key, konstruktorda qiymat beriladi
-- **Title**: string → maksimum 255 belgidan iborat, maksimum 255 belgi, majburiy property (bo'sh bo'lishi mumkin emas), *unique emas*
-- **ShortName**: string → uzunligi 3 ga teng bo'lgan majburiy property, *unique* (masalan: Pepperoni → PPR)
-- **StockStatus**: EPizzaStockStatus (enum) → [In, Out] majburiy
-    - Ushbu property uchun `/Entities` papkasida alohida enum yaratish kerak
-- **Ingredients**: string → (vergul bilan ajratilgan masallig'lar ro'yhati) maksimum 1024 belgi, majburiy property (bo'sh bo'lishi mumkin emas)
-- **Price**: double → majburiy property, minimum qiymati 0 va maksimum qiymati 1000
+- **Id**: Guid → key, konstruktorda qiymat beriladi ✅
+- **Title**: string → maksimum 255 belgidan iborat, maksimum 255 belgi, majburiy property (bo'sh bo'lishi mumkin emas), *unique emas* ✅
+- **ShortName**: string → uzunligi 3 ga teng bo'lgan majburiy property, *unique* (masalan: Pepperoni → PPR) ✅
+- **StockStatus**: EPizzaStockStatus (enum) → [In, Out] majburiy ✅
+    - Ushbu property uchun `/Entities` papkasida alohida enum yaratish kerak ✅
+- **Ingredients**: string → (vergul bilan ajratilgan masallig'lar ro'yhati) maksimum 1024 belgi, majburiy property (bo'sh bo'lishi mumkin emas) ✅
+- **Price**: double → majburiy property, minimum qiymati 0 va maksimum qiymati 1000 ✅
 
 ### Pizza model
 
 `/Models/Pizza.cs`
 
-- **Id**: Guid → key
-- **Title**: string → maksimum 255 belgidan iborat, maksimum 255 belgi, majburiy property (bo'sh bo'lishi mumkin emas), *unique emas*
-- **ShortName**: string → uzunligi 3 ga teng bo'lgan majburiy property, *unique* (masalan: Pepperoni → PPR)
-- **StockStatus**: EPizzaStockStatus (enum) → [In, Out] majburiy
-    - Ushbu property uchun `/Models` papkasida alohida enum yaratish kerak
-- **Ingredients**: string → (vergul bilan ajratilgan masallig'lar ro'yhati) maksimum 1024 belgi, majburiy property (bo'sh bo'lishi mumkin emas)
-- **Price**: double → majburiy property, minimum qiymati 0 va maksimum qiymati 1000
+- **Id**: Guid → key ✅
+- **Title**: string → maksimum 255 belgidan iborat, maksimum 255 belgi, majburiy property (bo'sh bo'lishi mumkin emas), *unique emas* ✅
+- **ShortName**: string → uzunligi 3 ga teng bo'lgan majburiy property, *unique* (masalan: Pepperoni → PPR) ✅
+- **StockStatus**: EPizzaStockStatus (enum) → [In, Out] majburiy ✅
+    - Ushbu property uchun `/Models` papkasida alohida enum yaratish kerak ✅
+- **Ingredients**: string → (vergul bilan ajratilgan masallig'lar ro'yhati) maksimum 1024 belgi, majburiy property (bo'sh bo'lishi mumkin emas) ✅
+- **Price**: double → majburiy property, minimum qiymati 0 va maksimum qiymati 1000 ✅
 
 ### Pizza Controller
 
@@ -59,10 +59,10 @@ public class PizzaController : ControllerBase
 
 ```
 
-Controllerga qabul qilingan hamma Pizza ma'lumotlar `/Models/Pizza.cs` modelga parse qilinishi kerak. Qaytarib klientga jo'natilayotgan ma'lumotlar ham ushbu modelga parse qilinishi kerak.
+Controllerga qabul qilingan hamma Pizza ma'lumotlar `/Models/Pizza.cs` modelga parse qilinishi kerak. Qaytarib klientga jo'natilayotgan ma'lumotlar ham ushbu modelga parse qilinishi kerak. ✅
 
 - Userdan ma'lumot qabul qilganda, Validation `/Models/Pizza.cs` ichiga yozilga attributelar orqali amalga oshirilishi kerak.
-- enum tipdagi propertylar qaytarilganda 'string' ko'rinishida bo'lishi kerak.
+- enum tipdagi propertylar qaytarilganda 'string' ko'rinishida bo'lishi kerak. ✅
 
 ### Action detallari
 
