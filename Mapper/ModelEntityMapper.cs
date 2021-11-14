@@ -1,34 +1,37 @@
+using PizzaApi.Entities;
+using PizzaApi.Model;
+
 namespace PizzaApi.Mapper
 {
-   public static class ModelEntityMapper
+   public static class ModelEntityPizzaMapper
     {
-        public static PizzaApi.Entities.Pizza ToTaskEntity(this Model.NewPizza newPizza)
+        public static Pizza ToPizzaEntities(this NewPizza newPizza)
         {
-            return new PizzaApi.Entities.Pizza(
+            return new Pizza(
                 title: newPizza.Title,
-                shortName: newPizza.ShortName is null ? string.Empty : string.Join(',', newPizza.ShortName),
-                stocStatus: newPizza.StocStatus.ToEntityPizzaStockStatus(),
+                shortName: newPizza.ShortName,
+                stockStatus: newPizza.StockStatus.ToEntitiesStockStatus(),
                 ingredients: newPizza.Ingredients,
                 price: newPizza.Price
             );
         }
-
-        public static PizzaApi.Entities.Pizza ToTaskEntity(this Model.UpdatedTask task)
+        public static Pizza ToPizzaEntities(this UpdatedPizza updatedPizza)
         {
-            return new PizzaApi.Entities.Pizza(
-                title: task.Title,
-                description: task.Description,
-                tags: task.Tags is null ? string.Empty : string.Join(',', task.Tags),
-                location: task.Location is null ? string.Empty : string.Format($"{task.Location.Latitude},{task.Location.Longitude}"),
-                atATime: task.AtATime,
-                onADay: task.OnADay,
-                repeat: task.Repeat.ToEntityETaskRepeat(),
-                status: task.Status.ToEntityETaskStatus(),
-                priority: task.Priority.ToEntityETaskPriority(),
-                url: task.Url)
-                {
-                    Id = task.Id
-                };
+            return new Pizza(
+                title: updatedPizza.Title,
+                shortName: updatedPizza.ShortName,
+                stockStatus: updatedPizza.StockStatus.ToEntitiesStockStatus(),
+                ingredients: updatedPizza.Ingredients,
+                price: updatedPizza.Price
+            );
+        }
+        public static Entities.EPizzaStockStatus ToEntitiesStockStatus(this Model.EPizzaStockStatus stockStatus)
+        {
+            return stockStatus switch
+            {
+                Model.EPizzaStockStatus.In => Entities.EPizzaStockStatus.In,
+                _ => Entities.EPizzaStockStatus.Out
+            };
         }
     }
 }

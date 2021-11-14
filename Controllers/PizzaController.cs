@@ -25,44 +25,52 @@ namespace PizzaApi.Controllers
 
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
-        public async Pizza<IActionResult> CreateTask([FromBody]NewPizza newTask)
+        public async Task<IActionResult> CreateTask([FromBody]NewPizza newPizza)
         {
-            var pizzaEntity = NewPizza.ToTaskEntity();
-            var insertResult = await _storage.InsertTaskAsync(pizzaEntity);
+            var pizzaEntity = NewPizza.ToPizzaEntity();
+            var pizzaResult = await _pizzaStore.InsertPizzaAsync(pizzaEntity);
 
-            if(insertResult.IsSuccess)
+            if(pizzaResult.IsSuccess)
             {
-                return CreatedAtAction("CreateTask", pizzaEntity);
+                return CreatedAtAction(nameof(CreatePizza), new { id = pizzaEntity.Id }, pizzaEntity);
             }
 
-            return StatusCode((int)HttpStatusCode.InternalServerError, new { message = insertResult.exception.Message });
+            return BadRequest();
+        }
+
+         [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            var pizzas = await _pizzaStore.GetPizzaAsync();
+            if (pizzas.IsSuccess)
+            {
+                return Ok(pizzas.pizza);
+            }
+            return BadRequest();
         }
 
         [HttpGet]
-        public async Task<IActionResult> QueryTasks([FromQuery]PizzaQuery query)
+        [Route("{id}")]
+        public async Task<IActionResult> GetAsync([FromRoute] Guid id)
         {
-            var tasks = await _storage.GetPizzaAsync(title: query.Title, id: query.Id);
-
-            if(tasks.Any())
+            var pizza = await _pizzaStore.GetPizzaAsync(id);
+            if (pizza.IsSuccess)
             {
-                return Ok(tasks);
+                return Ok(pizza.pizzaResult);
             }
-
-            return NotFound("No tasks exist!");
+            return NotFound();
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateTaskAsync([FromBody]UpdatePizza updatedPizza)
+        [Route("{id}")]
+        public async Task<IActionResult> PutAsync([FromRoute] Guid id, [FromBody] UpdatedPizza updatedPizza)
         {
-            var entity = updatedPizza.ToTaskEntity();
-            var updateResult = await _storage.UpdatePizzaAsync(entity);
-
-            if(updateResult.isSuccess)
+            var updatedPizzaResult = await _pizzaStore.UpdatePizzaAsync(id, updatedPizza);
+            if (updatedPizzaResult.IsSuccess)
             {
-                return Ok();
+                return Ok(updatedPizzaResult.updatedPizza);
             }
-
-            return BadRequest(updateResult.exception.Message);
+            return BadRequest();
         }
 
         [HttpDelete]

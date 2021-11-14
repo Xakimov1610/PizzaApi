@@ -32,7 +32,7 @@ namespace PizzaApi.Entities
 
         [Obsolete("Used only for entity binding.", true)]
         public Pizza() { }
-        public Pizza(string title, string shortName, EPizzaStockStatus stocStatus, string ingredients, double price)
+        public Pizza(string title, string shortName, EPizzaStockStatus stocStatus, string ingredients, double price, EPizzaStockStatus stockStatus)
         {
             Id = Guid.NewGuid();
             Title = title;
