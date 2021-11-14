@@ -18,7 +18,7 @@ namespace PizzaApi.Entities
         [MaxLength(3)]
         public string ShortName { get; set; }
         
-        public EPizzaStockStatus StocStatus { get; set; }  
+        public EPizzaStockStatus StockStatus { get; set; }  
 
         [Required]
         [MaxLength(1024)]
@@ -32,12 +32,12 @@ namespace PizzaApi.Entities
 
         [Obsolete("Used only for entity binding.", true)]
         public Pizza() { }
-        public Pizza(string title, string shortName, EPizzaStockStatus stocStatus, string ingredients, double price, EPizzaStockStatus stockStatus)
+        public Pizza(string title, string shortName, EPizzaStockStatus stockStatus, string ingredients, double price)
         {
             Id = Guid.NewGuid();
             Title = title;
             ShortName = shortName;
-            StocStatus = stocStatus;
+            StockStatus = stockStatus;
             Ingredients = ingredients;
             Price = price;
         }

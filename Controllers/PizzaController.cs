@@ -1,11 +1,10 @@
 using System;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PizzaApi.Mapper;
 using PizzaApi.Model;
 using PizzaApi.Service;
-using PizzaApi.Entities;
 
 namespace PizzaApi.Controllers
 {
@@ -14,31 +13,29 @@ namespace PizzaApi.Controllers
     public class PizzaController : ControllerBase
     {
         private readonly ILogger<PizzaController> _logger;
-        private readonly IStorageService _storage;
+        private readonly IStorageService _pizzaStore;
 
-        public PizzaController(ILogger<PizzaController> logger, IStorageService storage)
+        public PizzaController(ILogger<PizzaController> logger, IStorageService pizzaStore)
         {
             _logger = logger;
-            _storage = storage;
+            _pizzaStore = pizzaStore;
         }
 
-
         [HttpPost]
-        [Consumes(MediaTypeNames.Application.Json)]
-        public async Task<IActionResult> CreateTask([FromBody]NewPizza newPizza)
+        [ActionName(nameof(CreatePizza))]
+        public async Task<IActionResult> CreatePizza([FromBody] NewPizza newPizza)
         {
-            var pizzaEntity = NewPizza.ToPizzaEntity();
+            var pizzaEntity = newPizza.ToPizzaEntities();
             var pizzaResult = await _pizzaStore.InsertPizzaAsync(pizzaEntity);
 
-            if(pizzaResult.IsSuccess)
+            if (pizzaResult.IsSuccess)
             {
                 return CreatedAtAction(nameof(CreatePizza), new { id = pizzaEntity.Id }, pizzaEntity);
             }
-
             return BadRequest();
         }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
             var pizzas = await _pizzaStore.GetPizzaAsync();
@@ -72,23 +69,5 @@ namespace PizzaApi.Controllers
             }
             return BadRequest();
         }
-
-        [HttpDelete]
-        [Route("{Id}")]
-        public async Task<IActionResult> RemovePizzaAsync([FromRoute]Guid Id)
-        {
-            
-            var DelateId = await _storage.RemovePizzaAsync(Id);
-
-            if(DelateId.IsSuccess)
-            {
-                return Ok();
-            }
-
-            return NotFound(DelateId.exception.Message);
-        }
-
-
     }
-}
 }

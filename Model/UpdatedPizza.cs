@@ -1,29 +1,23 @@
-using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PizzaApi.Model
 {
-    public class NewPizza
+    public class UpdatedPizza
     {
-        public Guid Id { get; set; }
-
-        [Required]
-        [MaxLength(250)]
+        [MaxLength(255)]
         public string Title { get; set; }
 
-        [Required]
         [MaxLength(3)]
         public string ShortName { get; set; }
-        
-        public EPizzaStockStatus StockStatus { get; set; }  
 
-        [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public EPizzaStockStatus StockStatus { get; set; }
+
         [MaxLength(1024)]
         public string Ingredients { get; set; }
-        
-        [Required]
-        [MinLength(0)]
-        [MaxLength(1000)]
+
+        [Range(0, 1000)]
         public double Price { get; set; }
     }
 }

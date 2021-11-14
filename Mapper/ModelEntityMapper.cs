@@ -1,16 +1,17 @@
 using PizzaApi.Entities;
 using PizzaApi.Model;
+using System;
 
 namespace PizzaApi.Mapper
 {
-   public static class ModelEntityPizzaMapper
+   public static class ModelEntityPizza
     {
         public static Pizza ToPizzaEntities(this NewPizza newPizza)
         {
             return new Pizza(
                 title: newPizza.Title,
                 shortName: newPizza.ShortName,
-                stockStatus: newPizza.StocStatus.ToEntitiesStockStatus(),
+                stockStatus: newPizza.StockStatus.ToEntitiesStockStatus(),
                 ingredients: newPizza.Ingredients,
                 price: newPizza.Price
             );
@@ -29,8 +30,8 @@ namespace PizzaApi.Mapper
         {
             return stockStatus switch
             {
-                Model.EPizzaStockStatus => Entities.EPizzaStockStatus.In,
-                _ => Entities.EPizzaStockStatus.Out
+                Model.EPizzaStockStatus => Entities.EPizzaStockStatus.In
+                // _ => Entities.EPizzaStockStatus.Out
             };
         }
     }

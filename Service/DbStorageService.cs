@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PizzaApi.Entities;
 using PizzaApi.Service;
 
-namespace PizzaApi.Services
+namespace PizzaApi.Service
 {
     public class DbStoreService : IStorageService
     {
