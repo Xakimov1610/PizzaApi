@@ -10,7 +10,7 @@ namespace PizzaApi.Mapper
             return new Pizza(
                 title: newPizza.Title,
                 shortName: newPizza.ShortName,
-                stockStatus: newPizza.StockStatus.ToEntitiesStockStatus(),
+                stockStatus: newPizza.StocStatus.ToEntitiesStockStatus(),
                 ingredients: newPizza.Ingredients,
                 price: newPizza.Price
             );
@@ -29,7 +29,7 @@ namespace PizzaApi.Mapper
         {
             return stockStatus switch
             {
-                Model.EPizzaStockStatus.In => Entities.EPizzaStockStatus.In,
+                Model.EPizzaStockStatus => Entities.EPizzaStockStatus.In,
                 _ => Entities.EPizzaStockStatus.Out
             };
         }
