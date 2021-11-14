@@ -1,5 +1,14 @@
 # PizzaApi
 
+## **Ilmhub Pizza**
+
+- [x]  API Created
+- [x]  Pizza Entity
+- [x]  Pizza Model
+- [x]  Migrations
+- [x]  Pizza Controller
+- [x]  Database
+
 ### Na'muna holat
 
 Tasavvur qiling siz `Ilmhub Pizza` pitsa do'konlari tarmog'ida dasturiy ta'minotchi bo'lib ishlaysiz. Gap shundaki, yaqin orada `Ilmhub Pizza` Telegram Bot, Veb-sayt va Mobil ilova kabi o'z klient dasturlariga ega bo'ladi. Sizga tarmoqdagi barcha pitsa turlari omborini veb-servis sifatida qurish va klient dasturlarni ma'lumot bilan ta'minlash yuklatilgan.
@@ -66,7 +75,7 @@ Controllerga qabul qilingan hamma Pizza ma'lumotlar `/Models/Pizza.cs` modelga
 
 ### Action detallari
 
-## `GET` - `/api/pizza`
+## `GET` - `/api/pizza` ✅
 
 ```
 [HttpGet]
@@ -76,15 +85,15 @@ public async Task<ActionResult> GetAllAsync() { ... }
 
 Qaytariladigan ma'lumotlar
 
-`Ok()`
+`Ok()` ✅
 
 **200**
 
-Barcha pitsa turlari response tanasida `/Models/Pizza.cs` JSON Array shaklida yuboriladi
+Barcha pitsa turlari response tanasida `/Models/Pizza.cs` JSON Array shaklida yuboriladi ✅
 
 ---
 
-## `GET` - `/api/pizza/{id}`
+## `GET` - `/api/pizza/{id}` ✅
 
 ```
 [HttpGet]
@@ -95,7 +104,7 @@ public async Task<ActionResult> GetAsync([FromRoute]Guid id) { ... }
 
 Qaytariladigan ma'lumotlar
 
-`Ok()`
+`Ok()` ✅
 
 **200**
 
@@ -105,7 +114,7 @@ Berilgan `id`ga mos keluvchi predmet ma'lumotlar omborida bor bo'lsa, response 
 
 **404**
 
-Berilgan `id`ga mos keluvchi predmet ma'lumotlar omborida topilmasa qaytariladi (ixtiyoriy response error message jo'natsa bo'ladi).
+Berilgan `id`ga mos keluvchi predmet ma'lumotlar omborida topilmasa qaytariladi (ixtiyoriy response error message jo'natsa bo'ladi). ✅
 
 ---
 
@@ -135,7 +144,7 @@ Hozirgina ma'lumotlar omboriga qo'shilgan Pizza Entity response bodyda yuqorida 
 
 **400**
 
-Request (so'rov) tanasida yuborilgan pitsa ma'lumotlar hato (invalid) bo'lganida qaytariladi
+Request (so'rov) tanasida yuborilgan pitsa ma'lumotlar hato (invalid) bo'lganida qaytariladi ✅
 
 ---
 
@@ -163,17 +172,17 @@ Kerakli pitsa predmeti o'zgartirildi. Tanasi bo'sh bo'lgan response qaytariladi.
 
 **400**
 
-Request (so'rov) tanasidagi Pizza objecting **Id** propertysi bilan route-parameter **id** bir biriga mos kelmaganida qaytariladi.
+Request (so'rov) tanasidagi Pizza objecting **Id** propertysi bilan route-parameter **id** bir biriga mos kelmaganida qaytariladi. 
 
 `BadRequest()`
 
 **400**
 
-Request (so'rov) tanasidagi Pizza object invalid bo'lganida qaytariladi (Model Validation)
+Request (so'rov) tanasidagi Pizza object invalid bo'lganida qaytariladi (Model Validation) ✅
 
 ---
 
-## `DELETE` - `/api/pizza/{id}`
+## `DELETE` - `/api/pizza/{id}` ✅
 
 ```
 [HttpPut]
@@ -197,4 +206,4 @@ Kerakli pitsa predmeti o'chirildi. Tanasi bo'sh bo'lgan response qaytariladi.
 
 **404**
 
-Berilgan `id`ga mos keluvchi predmet ma'lumotlar omborida topilmasa qaytariladi (ixtiyoriy response error message jo'natsa bo'ladi).
+Berilgan `id`ga mos keluvchi predmet ma'lumotlar omborida topilmasa qaytariladi (ixtiyoriy response error message jo'natsa bo'ladi). ✅
